@@ -182,6 +182,7 @@ class Ey::Core::Client < Cistern::Service
   request :discover_database_server
   request :discover_database_server_snapshots
   request :discover_provider_location
+  request :discover_server
   request :download_file
   request :enable_feature
   request :get_account
