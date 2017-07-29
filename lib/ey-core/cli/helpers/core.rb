@@ -173,6 +173,22 @@ module Ey
             end
           end
 
+          def core_environments(environment_name_or_id)
+            core_client.environments.all(name: environment_name_or_id).tap do |result|
+              result << core_client.environments.get(environment_name_or_id) if result.empty?
+            end.to_a.compact
+          end
+
+          def core_applications(application_name_or_id)
+            core_client.applications.all(name: application_name_or_id).tap do |result|
+              result << core_client.applications.get(application_name_or_id) if result.empty?
+            end.to_a.compact
+          end
+
+          def core_environment_variables
+            core_client.environment_variables
+          end
+
           def write_core_yaml(token=nil)
             core_yaml[core_url] = token if token
             File.open(self.class.core_file, "w") {|file|
